@@ -26,6 +26,7 @@ public class BioBotApplication {
             botOptions.setProxyPort(PROXY_PORT);
             botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS4);
 
+            botsApi.registerBot(new BioBot());
 
         } catch (Exception e) {
 
