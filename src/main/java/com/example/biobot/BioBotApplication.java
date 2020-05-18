@@ -14,7 +14,6 @@ public class BioBotApplication {
 
     public static void main(String[] args) {
 
-
         try {
 
             ApiContextInitializer.init();
