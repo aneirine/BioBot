@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public final class BioBot extends TelegramLongPollingBot {
 
+    private static final String BOT_NAME = "BioBot";
+    private static final String BOT_TOKEN = "887712066:AAH9iCyuutngQo62jxqw0Sf_ObqUNkK7Vlc";
 
     @Override
     public void onUpdateReceived(Update update) {
