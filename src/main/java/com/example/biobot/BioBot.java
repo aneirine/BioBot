@@ -10,6 +10,7 @@ public final class BioBot extends TelegramLongPollingBot {
 
     private static final String BOT_NAME = "BioBot";
     private static final String BOT_TOKEN = "887712066:AAH9iCyuutngQo62jxqw0Sf_ObqUNkK7Vlc";
+    private static Language language;
 
 
     @Override
@@ -17,7 +18,15 @@ public final class BioBot extends TelegramLongPollingBot {
         Message message = update.getMessage();
         String text = message.getText();
         if (text.equals("/start")) {
-            sendMessage(message, "Ну привет");
+            sendMessage(message, "Hello. Please, choose the language: /english /ukrainian");
+        } else if (text.equals("/english")) {
+            language = Language.ENGLISH;
+            sendMessage(message, "Chosen language is English");
+        } else if (text.equals("/ukrainian")) {
+            language = Language.UKRAINIAN;
+            sendMessage(message, "Обрана українська мова");
+        } else {
+            sendMessage(message, "I don't understand you");
         }
     }
 
