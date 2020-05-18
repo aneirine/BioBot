@@ -1,4 +1,4 @@
-package com.example.biobot;
+package com.example.biobot.anonymous;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
