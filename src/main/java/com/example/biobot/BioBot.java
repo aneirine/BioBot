@@ -7,21 +7,10 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 
+import java.util.Objects;
+
 public final class BioBot extends TelegramLongPollingBot {
 
-    private static final Logger LOG = LogManager.getLogger(Anonymous.class);
-
-    private final User user;
-    private final Chat chat;
-
-    public BioBot(User user, Chat chat) {
-        if (user == null || chat == null) {
-            LOG.error("USER_CHAT_CANNOT_BE_NULL");
-            throw new IllegalStateException("USER_CHAT_CANNOT_BE_NULL");
-        }
-        this.user = user;
-        this.chat = chat;
-    }
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -37,4 +26,8 @@ public final class BioBot extends TelegramLongPollingBot {
     public String getBotToken() {
         return null;
     }
+
+
+
+
 }
