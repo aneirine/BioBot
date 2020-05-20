@@ -1,5 +1,6 @@
 package com.example.biobot;
 
+import com.example.biobot.server.ServerConnection;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -46,10 +47,16 @@ public final class BioBot extends TelegramLongPollingBot {
                 ));
                 break;
             default:
+                /*
                 sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(),
                         language == Language.ENGLISH ?
                                 "I don't understand you. Try /help to see all available commands" :
-                                "Я вас не розумію. Спробуйте комманду /help щоб побачити усі можливі комманди"));
+                                "Я вас не розумію. Спробуйте комманду /help щоб побачити усі можливі комманди"));*/
+                try {
+                    new ServerConnection().sendGetRequest(message, language);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         }
 
 

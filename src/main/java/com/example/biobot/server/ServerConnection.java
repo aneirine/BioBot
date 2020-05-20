@@ -1,13 +1,16 @@
 package com.example.biobot.server;
 
 import com.example.biobot.Language;
-import com.example.biobot.server.util.ParameterStringBuilder;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.DataOutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ServerConnection {
 
@@ -16,26 +19,39 @@ public class ServerConnection {
     public static final String UKRAINIAN = "uk";
 
 
-    public void sendGet(String message, Language language) throws Exception {
+    public void sendGetRequest(String message, Language language) throws Exception {
 
-        URL url = new URL(URL);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = null;
 
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("question", message);
-        parameters.put("lang", language == Language.ENGLISH ? ENGLISH : UKRAINIAN);
+        try {
 
-        connection.setDoOutput(true);
-        DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-        out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
-        out.flush();
-        out.close();
+            URIBuilder builder = new URIBuilder(URL);
+            builder.setParameter("question", message)
+                    .setParameter("lang", language == Language.ENGLISH ? ENGLISH : UKRAINIAN);
 
 
-        connection.setRequestMethod("GET");
+            HttpRequestBase request = new HttpGet(builder.build());
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpResponse resp = httpClient.execute(request);
+
+            InputStream is = resp.getEntity().getContent();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+                response.append('\r');
+            }
+            rd.close();
+            System.out.printf("RESPONSE " + response.toString());
 
 
-    }
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+/
 }
