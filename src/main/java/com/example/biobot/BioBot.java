@@ -41,7 +41,7 @@ public final class BioBot extends TelegramLongPollingBot {
                 sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(),
                         language == Language.ENGLISH ?
                                 "All commands: \n /start - start the bot \n /stop - stop the bot \n /help - see all commands \n /language - choose the language " :
-                                "Усі комманди: \n /start - розпочати роботу бота \n /stop - зупинити роботу бота  \n /help - побачити усі команди \n /language - змінити мову "
+                                "Усі команди: \n /start - розпочати роботу бота \n /stop - зупинити роботу бота  \n /help - побачити усі команди \n /language - змінити мову "
 
                 ));
                 break;
