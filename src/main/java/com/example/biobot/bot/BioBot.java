@@ -24,7 +24,7 @@ public final class BioBot extends TelegramLongPollingBot {
                 break;
             case "/language":
                 sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(),
-                        "If you want English, try /english.\n Якщо бажана мова для вас - українська, використайте /ukrainian"));
+                        "If you want English, try /english.\nЯкщо бажана мова для вас - українська, використайте /ukrainian"));
                 break;
             case "/english":
                 language = Language.ENGLISH;
@@ -37,8 +37,8 @@ public final class BioBot extends TelegramLongPollingBot {
             case "/help":
                 sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(),
                         language == Language.ENGLISH ?
-                                "All commands: \n /start - start the bot \n /help - see all commands \n /language - choose the language " :
-                                "Усі команди: \n /start - розпочати роботу бота  \n /help - побачити усі команди \n /language - змінити мову "
+                                "All commands: \n/start - start the bot \n/help - see all commands \n/language - choose the language " :
+                                "Усі команди: \n/start - розпочати роботу бота  \n/help - побачити усі команди \n/language - змінити мову "
 
                 ));
                 break;

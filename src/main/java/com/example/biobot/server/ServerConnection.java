@@ -19,7 +19,6 @@ public class ServerConnection {
     public static final String ENGLISH = "en";
     public static final String UKRAINIAN = "uk";
 
-
     public String sendGetRequest(String message, Language language) {
         try {
 
@@ -41,7 +40,7 @@ public class ServerConnection {
             }
             rd.close();
 
-            JSONObject object = new JSONObject(response);
+            JSONObject object = new JSONObject(response.toString());
             return  object.getString("translated_answer");
         } catch (Exception e) {
             e.printStackTrace();
