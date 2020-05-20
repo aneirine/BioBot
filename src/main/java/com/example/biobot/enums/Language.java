@@ -1,4 +1,4 @@
-package com.example.biobot;
+package com.example.biobot.enums;
 
 public enum  Language {
 
