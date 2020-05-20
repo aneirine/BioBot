@@ -1,6 +1,6 @@
 package com.example.biobot.server;
 
-import com.example.biobot.Language;
+import com.example.biobot.enums.Language;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -41,20 +41,13 @@ public class ServerConnection {
             }
             rd.close();
 
-            return convertStringToJson(response.toString());
+            JSONObject object = new JSONObject(response);
+            return  object.getString("translated_answer");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private String convertStringToJson(String response) {
-        System.out.println("RESPONSE " + response);
-        JSONObject object = new JSONObject(response);
-        System.out.println("JSON " + object.toString());
-
-        System.out.println("TRANS    " + object.getString("translated_answer"));
-        return object.getString("translated_answer");
-    }
 
 }

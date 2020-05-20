@@ -1,5 +1,6 @@
-package com.example.biobot;
+package com.example.biobot.bot;
 
+import com.example.biobot.enums.Language;
 import com.example.biobot.server.ServerConnection;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
