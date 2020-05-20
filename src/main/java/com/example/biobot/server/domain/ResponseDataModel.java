@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RequestDataModel {
+public class ResponseDataModel {
 
-    public String question;
+    public String original_answer;
 
-    public String lang;
+    public String translated_answer;
 }
