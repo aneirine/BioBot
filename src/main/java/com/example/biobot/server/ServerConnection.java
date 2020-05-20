@@ -7,10 +7,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class ServerConnection {
 
@@ -19,16 +20,12 @@ public class ServerConnection {
     public static final String UKRAINIAN = "uk";
 
 
-    public void sendGetRequest(String message, Language language) throws Exception {
-
-        HttpURLConnection connection = null;
-
+    public String sendGetRequest(String message, Language language) {
         try {
 
             URIBuilder builder = new URIBuilder(URL);
             builder.setParameter("question", message)
                     .setParameter("lang", language == Language.ENGLISH ? ENGLISH : UKRAINIAN);
-
 
             HttpRequestBase request = new HttpGet(builder.build());
             HttpClient httpClient = new DefaultHttpClient();
@@ -43,16 +40,21 @@ public class ServerConnection {
                 response.append('\r');
             }
             rd.close();
-            System.out.printf("RESPONSE " + response.toString());
 
-
+            return convertStringToJson(response.toString());
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
+            return null;
         }
+    }
+
+    private String convertStringToJson(String response) {
+        System.out.println("RESPONSE " + response);
+        JSONObject object = new JSONObject(response);
+        System.out.println("JSON " + object.toString());
+
+        System.out.println("TRANS    " + object.getString("translated_answer"));
+        return object.getString("translated_answer");
     }
 
 }
