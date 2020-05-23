@@ -7,11 +7,15 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import static com.example.biobot.util.TextConstants.*;
+
 public final class BioBot extends TelegramLongPollingBot {
 
     private static final String BOT_NAME = "BioBot";
     private static final String BOT_TOKEN = "887712066:AAH9iCyuutngQo62jxqw0Sf_ObqUNkK7Vlc";
     private static Language language;
+
+    //text
 
 
     @Override
@@ -24,22 +28,21 @@ public final class BioBot extends TelegramLongPollingBot {
                 break;
             case "/language":
                 sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(),
-                        "If you want English, try /english.\nЯкщо бажана мова для вас - українська, використайте /ukrainian"));
+                        LANGUAGE_COMMAND));
                 break;
             case "/english":
                 language = Language.ENGLISH;
-                sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(), "Chosen language is English"));
+                sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(),
+                        ENGLISH_CHOSEN));
                 break;
             case "/ukrainian":
                 language = Language.UKRAINIAN;
-                sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(), "Обрана українська мова"));
+                sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(),
+                        UKRAINIAN_CHOSEN));
                 break;
             case "/help":
                 sendMessageToUser(constructMessage(update.getMessage().getChatId().toString(),
-                        language == Language.ENGLISH ?
-                                "All commands: \n/start - start the bot \n/help - see all commands \n/language - choose the language " :
-                                "Усі команди: \n/start - розпочати роботу бота  \n/help - побачити усі команди \n/language - змінити мову "
-
+                        language == Language.ENGLISH ? ENGLISH_HELP : UKRAINIAN_HELP
                 ));
                 break;
             default:
@@ -70,21 +73,13 @@ public final class BioBot extends TelegramLongPollingBot {
 
     private void startCommand(Long chatId) {
 
-        String englishMessage = "Welcome to BioBot. This bot can help you to solve different problem with health and find specific information according to your request." +
-                "\nPlease, before start choose the language. If you want english try /english . " +
-                "\nIf you don't understand something, try /help ." +
-                "\nIf you want to change language, try /language";
-        String ukrainianMessage = "Вітаємо у BioBot. Цей бот створений щоб допомогти Вам з вирішенням різних проблем, пов'язаних зі станом здоров'я, або знайти конкретну інформацію медичного напрямку за вашим запитом. " +
-                "\nБудь ласка, перед початком взаємодії оберіть мову. Якщо бажана мова для вас - українська, використайте /ukrainian . " +
-                "\nЯкщо ви чогось не розумієте, спробуйте /help ." +
-                "\nЯкщо ви бажаєте змінити мову, використайте /language";
-        SendMessage sendMessage = constructMessage(chatId.toString(), englishMessage + "\n\n" + ukrainianMessage);
+
+        SendMessage sendMessage = constructMessage(chatId.toString(), ENGLISH_START + "\n\n" + UKRAINIAN_START);
         sendMessageToUser(sendMessage);
     }
 
     private void languageSelection(String chatId) {
-        sendMessageToUser(constructMessage(chatId,
-                "Please, choose the language /english.\nБудь ласка, оберіть мову /ukrainian."));
+        sendMessageToUser(constructMessage(chatId, LANGUAGE_SELECTION));
     }
 
     public synchronized SendMessage constructMessage(String chatId, String text) {
