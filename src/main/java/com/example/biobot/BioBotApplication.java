@@ -1,6 +1,7 @@
 package com.example.biobot;
 
 
+import com.example.biobot.bot.BioBot;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.ApiContext;
@@ -14,7 +15,6 @@ public class BioBotApplication {
 
     public static void main(String[] args) {
 
-
         try {
 
             ApiContextInitializer.init();
@@ -27,6 +27,7 @@ public class BioBotApplication {
             botOptions.setProxyPort(PROXY_PORT);
             botOptions.setProxyType(DefaultBotOptions.ProxyType.SOCKS4);
 
+            botsApi.registerBot(new BioBot());
 
         } catch (Exception e) {
 
