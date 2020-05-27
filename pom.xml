@@ -18,7 +18,7 @@
                     <target>8</target>
                     <archive>
                            <manifest>
-                               <mainClass>com.example.biobot.bot.BioBotApplication</mainClass>
+                               <mainClass>com.example.biobot.BioBotApplication</mainClass>
                            </manifest>
                     </archive>
                 </configuration>
