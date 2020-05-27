@@ -16,6 +16,11 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
+                    <archive>
+                           <manifest>
+                               <mainClass>com.example.biobot.bot.BioBotApplication</mainClass>
+                           </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
