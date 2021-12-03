@@ -16,10 +16,8 @@ public class BioBotApplication {
     public static void main(String[] args) {
 
         try {
-
             ApiContextInitializer.init();
             TelegramBotsApi botsApi = new TelegramBotsApi();
-
 
             DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
 
