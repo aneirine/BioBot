@@ -41,7 +41,7 @@ public class ServerConnection {
             rd.close();
 
             JSONObject object = new JSONObject(response.toString());
-            return  object.getString("translated_answer");
+            return object.getString("translated_answer");
         } catch (Exception e) {
             e.printStackTrace();
             return null;
